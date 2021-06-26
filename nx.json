@@ -4,11 +4,14 @@
     "defaultBase": "master"
   },
   "implicitDependencies": {
+    "workspace.json": "*",
     "package.json": {
       "dependencies": "*",
       "devDependencies": "*"
     },
-    ".eslintrc.json": "*"
+    "tsconfig.base.json": "*",
+    "tslint.json": "*",
+    "nx.json": "*"
   },
   "tasksRunnerOptions": {
     "default": {
@@ -19,7 +22,19 @@
     }
   },
   "projects": {
-    "admin": {
+    "domain": {
+      "tags": []
+    },
+    "data-access": {
+      "tags": []
+    },
+    "services": {
+      "tags": []
+    },
+    "api": {
+      "tags": []
+    },
+    "core": {
       "tags": []
     }
   }
