@@ -30,7 +30,7 @@ export class LoggingInterceptor implements NestInterceptor {
     return call.handle().pipe(
       tap(() => {
         requestLog.processTime = `${Date.now() - now}ms`;
-        this.loggerService.log(requestLog);
+        //this.loggerService.log(requestLog);
       })
     );
   }

@@ -1,9 +1,9 @@
 import { SecurityService } from '../security/security.service';
 import { UsuarioService } from '../usuario/usuario.service';
-import { Usuario } from '@admin/domain';
 import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
+import { Usuario } from '@admin/domain';
 
 
 @Injectable()
@@ -21,10 +21,9 @@ export class AuthService {
   // }
 
   async login(user: Usuario): Promise<any> {
-    const payload = { email: user.email, sub: user };
+    const payload = { email: user.login, sub: user };
     return {
       nome: user.nome,
-      perfil: user.perfil,
       token: this.jwtService.sign(payload),
     };
   }
@@ -45,15 +44,15 @@ export class AuthService {
     }
 
     const usuario = await this.usuarioService.getByEmail(email);
-    if (!usuario) {
-      throw new UnauthorizedException('Usuário ou senha inválidos');
-    }
-    if (!usuario.ativo) {
-      throw new UnauthorizedException('Usuário não está ativo');
-    }
-    if (!this.securityService.validarSenha(senha, usuario.senha)) {
-      throw new UnauthorizedException('Usuaário ou senha inválidos');
-    }
+    // if (!usuario) {
+    //   throw new UnauthorizedException('Usuário ou senha inválidos');
+    // }
+    // if (usuario.situacao !== SituacaoUsuario.ATIVO) {
+    //   throw new UnauthorizedException('Usuário não está ativo');
+    // }
+    // if (!this.securityService.validarSenha(senha, usuario.senha)) {
+    //   throw new UnauthorizedException('Usuaário ou senha inválidos');
+    // }
     return usuario;
   }
 

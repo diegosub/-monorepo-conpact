@@ -1,0 +1,14 @@
+{
+  "type": "postgres",
+  "host": "localhost",
+  "port": 5432,
+  "username": "spg",
+  "password": "spg#123",
+  "database": "db_spg2",
+  "synchronize": false,
+  "logging": true,
+  "migrations": ["./libs/data-access/src/lib/migrations/*.ts"],
+  "cli": {
+    "migrationsDir": "./libs/data-access/src/lib/migrations"
+  }
+}

@@ -1,12 +1,10 @@
-
-import { UsuarioRepositoryModule } from '@admin/data-access';
+import { Usuario } from '@admin/domain';
 import { Module } from '@nestjs/common';
+import { TypeOrmModule } from '@nestjs/typeorm';
 import { UsuarioService } from './usuario.service';
 
 @Module({
-  imports: [
-    UsuarioRepositoryModule
-  ],
+  imports: [TypeOrmModule.forFeature([Usuario])],
   providers: [UsuarioService],
   exports: [UsuarioService]
 })

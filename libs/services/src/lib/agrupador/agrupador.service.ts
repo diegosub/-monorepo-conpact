@@ -1,54 +1,39 @@
-
-import { Usuario } from '@admin/domain';
+import { Agrupador, AgrupadorAlterarDto, AgrupadorInserirDto, QueryHelper } from '@admin/domain';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Connection, Repository } from 'typeorm';
 
 @Injectable()
-export class UsuarioService {
+export class AgrupadorService {
   constructor(
-    @InjectRepository(Usuario)
-    private readonly repository: Repository<Usuario>,
+    @InjectRepository(Agrupador)
+    private readonly repository: Repository<Agrupador>,
     private connection: Connection
   ) { }
 
-  async getById(codigo: number): Promise<Usuario> {
+  async getById(codigo: number): Promise<Agrupador> {
     return await this.repository.findOne(codigo);
   }
 
-  async getByEmail(email: string): Promise<Usuario> {
-    return await this.repository.findOne(email);
+  async pesquisar(filtros: Agrupador): Promise<Agrupador[]> {
+
+    const queryHelper = new QueryHelper();
+
+    queryHelper.idEqual("codigo", filtros.codigo);
+    queryHelper.like("descricao", filtros.descricao);
+    queryHelper.rawEqual("ativo", filtros.ativo);
+
+    return await this.repository.find(queryHelper.filters);
   }
 
-  // async pesquisar(filtros: Usuario): Promise<Usuario[]> {
-  //   return await this.usuarioRepository.pesquisar(filtros);
-  // }
-
-  // async ativarUsuario(email: string): Promise<Usuario> {
-  //   const usuario = await this.getByEmail(email);
-  //   if (!usuario) {
-  //     throw new NotFoundException('Usuário não encontrado');
-  //   }
-  //   usuario.ativo = true;
-  //   usuario.dataAtivacao = DateUtils.now();
-  //   return await this.usuarioRepository.alterar(usuario._id, usuario);
-  // }
-
-  // async authUser(email: string): Promise<Usuario> {
-  //   return await this.repository.getByEmail(email);
-  // }
-
-  // async inserir(usuario: Usuario): Promise<Usuario> {
-  //   return await this.repository.inserir(usuario);
-  // }
-
-  async inserir(usuario: Usuario): Promise<Usuario> {
+  async inserir(agrupadorDto: AgrupadorInserirDto): Promise<Agrupador> {
     const queryRunner = this.connection.createQueryRunner();
     await queryRunner.connect();
     await queryRunner.startTransaction();
 
     try {
-      const retorno = await queryRunner.manager.save(usuario);
+      const agrupador = this.repository.create(agrupadorDto);
+      const retorno = await queryRunner.manager.save(agrupador);
       await queryRunner.commitTransaction();
       return retorno;
     } catch (err) {
@@ -60,9 +45,24 @@ export class UsuarioService {
 
   }
 
-  // async alterar(id: string, usuario: Usuario): Promise<Usuario> {
-  //  return await this.usuarioRepository.alterar(id, usuario);
-  // }
+  async alterar(codigo: number, agrupadorDto: AgrupadorAlterarDto): Promise<Agrupador> {
+    const queryRunner = this.connection.createQueryRunner();
+    await queryRunner.connect();
+    await queryRunner.startTransaction();
+
+    try {
+      const agrupador = this.repository.create(agrupadorDto);
+      const retorno = await queryRunner.manager.save(agrupador);
+      await queryRunner.commitTransaction();
+      return retorno;
+    } catch (err) {
+      await queryRunner.rollbackTransaction();
+      throw new Error(err);
+    } finally {
+      await queryRunner.release();
+    }
+
+  }
 
   // async listarUsuariosPaginado(filtros: FiltrosDTO): Promise<DataSetPage<Usuario>> {
   //   return await this.usuarioRepository.pesquisarPaginado(filtros);

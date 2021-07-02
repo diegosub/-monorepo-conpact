@@ -1,4 +1,4 @@
-export * from './base.model';
-export * from './pessoa';
 export * from './usuario';
-export * from './categoria';
+export * from './base';
+export * from './cadastro.unico';
+export * from './agrupador';

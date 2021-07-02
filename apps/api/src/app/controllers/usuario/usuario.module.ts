@@ -1,7 +1,7 @@
-
-import { UsuarioController } from './usuario.controller';
-import { Module } from '@nestjs/common';
 import { UsuarioServiceModule } from '@admin/services';
+import { Module } from '@nestjs/common';
+import { UsuarioController } from './usuario.controller';
+
 
 @Module({
   imports: [

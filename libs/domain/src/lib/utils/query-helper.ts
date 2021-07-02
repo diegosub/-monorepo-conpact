@@ -1,54 +1,52 @@
+import { Equal, ILike, In, Not, Raw } from "typeorm";
 
-import * as _ from 'lodash';
 
 export class QueryHelper {
 
   filters = {};
   sort = {}
 
-  // idEqual(field: string, id: number): QueryHelper {
-  //   if(id != null && id != undefined) {
-  //     this.filters[field] = mongoose.Types.ObjectId(id);
-  //   }
-  //   return this;
-  // }
-
-  // like(field: string, value: string): QueryHelper {
-  //   if(value != null && value != undefined) {
-  //     let regexValue = value.replace(/\./g, '\\.');
-  //     regexValue = regexValue.trim().replace(/ /g, ' +');
-  //     this.filters[field] = new RegExp(`.*${regexValue}.*`, 'i');
-  //   }
-  //   return this;
-  // }
-
-  equal(field: string, value: string): QueryHelper {
-    if(value != null && value != undefined) {
-      this.filters[field] = new RegExp(`^${value.replace(/\./g, '\\.').trim()}$`, 'i');
+  idEqual(field: string, id: number): QueryHelper {
+    if(id != null && id != undefined) {
+      this.filters[field] = Equal(id);
     }
     return this;
   }
 
-  // rawEqual(field: string, value: any): QueryHelper {
-  //   if(value != null && value != undefined) {
-  //     this.filters[field] = value;
-  //   }
-  //   return this;
-  // }
+  like(field: string, value: string): QueryHelper {
+    if(value != null && value != undefined) {
+      this.filters[field] = ILike("%" + value + "%");
+    }
+    return this;
+  }
 
-  // notEqual(field: string, value: any): QueryHelper {
-  //   if(value != null && value != undefined) {
-  //     this.filters[field] = { "$ne": value };
-  //   }
-  //   return this;
-  // }
+  equal(field: string, value: string): QueryHelper {
+    if(value != null && value != undefined) {
+      this.filters[field] = Equal(new RegExp(`^${value.replace(/\./g, '\\.').trim()}$`, 'i'));
+    }
+    return this;
+  }
 
-  // in(field: string, value: any[]): QueryHelper {
-  //   if(value != null && value != undefined) {
-  //     this.filters[field] = { "$in": value };
-  //   }
-  //   return this;
-  // }
+  rawEqual(field: string, value: any): QueryHelper {
+    if(value != null && value != undefined) {
+      this.filters[field] = Raw(value);
+    }
+    return this;
+  }
+
+  notEqual(field: string, value: any): QueryHelper {
+    if(value != null && value != undefined) {
+      this.filters[field] = Not(value);
+    }
+    return this;
+  }
+
+  in(field: string, value: any[]): QueryHelper {
+    if(value != null && value != undefined) {
+      this.filters[field] = In(value);
+    }
+    return this;
+  }
 
   // inFromObject(field: string, value: any[]): QueryHelper {
   //   if(value != null && value != undefined) {
@@ -64,7 +62,7 @@ export class QueryHelper {
   //     const keys = _.map(value, field);
   //     const objectsAdd = [];
   //     for (let i = 0; i < keys.length; i++) {
-  //       objectsAdd.push(mongoose.Types.ObjectId(keys[i]));
+  //       objectsAdd.push(keys[i]);
   //     }
   //     return this.in(field, objectsAdd);
   //   } else {
