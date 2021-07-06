@@ -24,14 +24,29 @@ export class AgrupadorController {
   @Post()
   @UsePipes(new ValidationPipe({ transform: true }))
   async inserir(@Body() agrupadorDto : AgrupadorInserirDto): Promise<Agrupador> {
-    agrupadorDto.dataInclusao = new Date();
-    agrupadorDto.ativo = true;
-    return await this.service.inserir(agrupadorDto);
+    const agrupador: Agrupador = new Agrupador();
+    Object.assign(agrupador, agrupadorDto);
+    agrupador.dataInclusao = new Date();
+    agrupador.ativo = true;
+    return await this.service.inserir(agrupador);
   }
 
-  @Put(':id')
+  @Put(':codigo')
   @UsePipes(new ValidationPipe({ transform: true }))
   async alterar(@Param('codigo') codigo: number, @Body() agrupadorDto: AgrupadorAlterarDto): Promise<Agrupador> {
-    return await this.service.alterar(codigo, agrupadorDto);
+    const agrupador: Agrupador = await this.service.getById(codigo);
+    Object.assign(agrupador, agrupadorDto);
+    agrupador.dataAlteracao = new Date();
+    return await this.service.alterar(codigo, agrupador);
+  }
+
+  @Put('/inativar/:codigo')
+  async inativar(@Param('codigo') codigo: number): Promise<Agrupador> {
+    return await this.service.inativar(codigo);
+  }
+
+  @Put('ativar/:codigo')
+  async ativar(@Param('codigo') codigo: number): Promise<Agrupador> {
+    return await this.service.ativar(codigo);
   }
 }

@@ -7,6 +7,7 @@
   "database": "db_spg2",
   "synchronize": false,
   "logging": true,
+  "logger": "file",
   "migrations": ["./libs/data-access/src/lib/migrations/*.ts"],
   "cli": {
     "migrationsDir": "./libs/data-access/src/lib/migrations"

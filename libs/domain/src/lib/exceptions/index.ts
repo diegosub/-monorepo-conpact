@@ -10,3 +10,4 @@ export * from './task.exception';
 export * from './xml.exception';
 export * from './builder.exception';
 export * from './email.exception';
+export * from './negocio.exception';

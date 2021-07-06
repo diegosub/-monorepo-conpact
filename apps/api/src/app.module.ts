@@ -18,7 +18,7 @@ import { getConnectionOptions } from 'typeorm';
       useFactory: async () =>
         Object.assign(await getConnectionOptions(), {
           autoLoadEntities: true,
-          logger: new LoggerService()
+          //logger: new LoggerService()
         }),
     }),
     LoggerServiceModule,

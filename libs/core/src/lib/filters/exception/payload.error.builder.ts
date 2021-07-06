@@ -1,3 +1,4 @@
+import { NegocioException } from '@admin/domain';
 import { BadRequestException, NotFoundException, UnauthorizedException } from '@nestjs/common';
 import { ErrorType } from './error.type';
 import { PayloadError } from './payload.error';
@@ -32,9 +33,15 @@ export class PayloadErrorBuilder {
             ErrorType.RECURSO_NAO_ENCONTRADO,
             response.message);
         } else {
-          return this.createPayloadError(500,
-            ErrorType.ERRO_DE_SISTEMA,
-            this.MSG_GENERICA);
+          if (this.error instanceof NegocioException) {
+            return this.createPayloadError(400,
+              ErrorType.ERRO_NEGOCIO,
+              this.error.message);
+          } else {
+            return this.createPayloadError(500,
+              ErrorType.ERRO_DE_SISTEMA,
+              this.MSG_GENERICA);
+          }
         }
       }
     }

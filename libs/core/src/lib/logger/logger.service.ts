@@ -9,7 +9,7 @@ export class LoggerService extends Logger {
     super();
   }
 
-  logQuery(query: string, parameters?: any[], queryRunner?: QueryRunner) {
+  logQueryError(query: string, parameters?: any[], queryRunner?: QueryRunner) {
     const requestUrl = queryRunner && queryRunner.data["request"] ? "(" + queryRunner.data["request"].url + ") " : "";
     console.log(requestUrl + "SQL Executado: " + sqlFormatter.format(query));
   }

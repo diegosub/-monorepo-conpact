@@ -6,21 +6,21 @@ export class QueryHelper {
   filters = {};
   sort = {}
 
-  idEqual(field: string, id: number): QueryHelper {
+  numberEqual(field: string, id: number): QueryHelper {
     if(id != null && id != undefined) {
       this.filters[field] = Equal(id);
     }
     return this;
   }
 
-  like(field: string, value: string): QueryHelper {
+  textLike(field: string, value: string): QueryHelper {
     if(value != null && value != undefined) {
       this.filters[field] = ILike("%" + value + "%");
     }
     return this;
   }
 
-  equal(field: string, value: string): QueryHelper {
+  textEqual(field: string, value: string): QueryHelper {
     if(value != null && value != undefined) {
       this.filters[field] = Equal(new RegExp(`^${value.replace(/\./g, '\\.').trim()}$`, 'i'));
     }

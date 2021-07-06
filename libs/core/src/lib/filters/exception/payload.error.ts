@@ -3,5 +3,5 @@ export class PayloadError {
   timestamp: string;
   type: string;
   message: string;
-  objects: string[];
+  objects?: string[];
 }
