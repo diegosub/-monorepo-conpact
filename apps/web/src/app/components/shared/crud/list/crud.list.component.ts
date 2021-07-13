@@ -4,7 +4,7 @@ import { DialogService } from './../../../../services/shared/dialog.service';
 import { FormGroup } from '@angular/forms';
 import { RemoteService } from './../../../../services/shared/remote.service';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   template: ''
@@ -20,17 +20,23 @@ export class CrudListComponent<T> implements OnInit {
     protected dialogService: DialogService,
     protected mensagem: MensagemService,
     protected router: Router,
+    protected route: ActivatedRoute,
     protected util: UtilService
   ) {}
 
   ngOnInit() {
     this.criarForm();
+    this.formulario.patchValue(this.util.inicioPaginaPesquisa(this.route));
+    this.util.fimPaginaPesquisa();
+
+    this.posIniciarPagina();
   }
 
   criarForm() {}
 
+  posIniciarPagina() {}
+
   pesquisar() {
-    console.log(this.formulario)
     this.service.pesquisar<T>(this.resource, this.formulario.value).subscribe (
       data => {
         this.lista = data;
@@ -70,13 +76,13 @@ export class CrudListComponent<T> implements OnInit {
 
   visualizar(codigo)
   {
-    //this.util.setarObjetoBack(this.objeto);
+    this.util.setarObjetoBack(this.formulario.value);
     this.router.navigate([`/${this.resource}/visualizar`], {queryParams: {codigo: codigo}});
   }
 
   alterar(codigo)
   {
-    //this.util.setarObjetoBack(this.objeto);
+    this.util.setarObjetoBack(this.formulario.value);
     this.router.navigate([`/${this.resource}/atualizar`], {queryParams: {codigo: codigo}});
   }
 

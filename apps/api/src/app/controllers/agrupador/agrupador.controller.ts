@@ -33,11 +33,11 @@ export class AgrupadorController {
 
   @Put(':codigo')
   @UsePipes(new ValidationPipe({ transform: true }))
-  async alterar(@Param('codigo') codigo: number, @Body() agrupadorDto: AgrupadorAlterarDto): Promise<Agrupador> {
-    const agrupador: Agrupador = await this.service.getById(codigo);
+  async alterar(@Param('codigo') codigo: string, @Body() agrupadorDto: AgrupadorAlterarDto): Promise<Agrupador> {
+    const agrupador: any = {codigo: codigo};
     Object.assign(agrupador, agrupadorDto);
     agrupador.dataAlteracao = new Date();
-    return await this.service.alterar(codigo, agrupador);
+    return await this.service.alterar(agrupador);
   }
 
   @Put('/inativar/:codigo')

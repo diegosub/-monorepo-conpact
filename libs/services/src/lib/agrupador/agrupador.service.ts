@@ -30,7 +30,7 @@ export class AgrupadorService extends GenericService<Agrupador> {
     });
   }
 
-  async validarInserir(queryRunner: QueryRunner, agrupador: Agrupador) {
+  async validarInserir(agrupador: Agrupador) {
     const queryHelper = new QueryHelper();
     queryHelper.textLike("descricao", agrupador.descricao);
     queryHelper.numberEqual("codigoCadastroUnico", agrupador.codigoCadastroUnico);

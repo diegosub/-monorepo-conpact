@@ -210,7 +210,6 @@ export class UtilService
 
   getCodigoCadastroUnicoLogado()
   {
-    console.log(this.getUsuarioLogado())
     return this.getUsuarioLogado().codigoCadastroUnico;
   }
 }

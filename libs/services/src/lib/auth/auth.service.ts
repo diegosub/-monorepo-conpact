@@ -16,27 +16,8 @@ export class AuthService {
     private readonly securityService: SecurityService,
   ) { }
 
-  async validateUser(username: string) {
-    let usuario = new Usuario();
-    usuario.login = username;
-    usuario.situacao = UsuarioService.SITUACAO_ATIVA;
-
-    const retorno = await this.usuarioService.get(usuario);
-
-    if(retorno) {
-      return {
-        codigo: retorno.codigo,
-        login: retorno.login,
-        nome: retorno.nome,
-        codigoCadastroUnico: retorno.codigoCadastroUnico
-      }
-    } else {
-      throw new UnauthorizedException('Este token não está válido');
-    }
-  }
-
   async login(user: Usuario): Promise<any> {
-    const payload = { login: user.login, sub: user };
+    const payload = { name: user.login, sub: user.codigo };
     return {
       codigo: user.codigo,
       codigoCadastroUnico: user.codigoCadastroUnico,
@@ -70,9 +51,9 @@ export class AuthService {
       throw new UnauthorizedException('Usuário ou senha inválidos');
     }
 
-    // if(usuario.situacao !== ) {
-    //   throw new UnauthorizedException('Usuário não se encontra ativo');
-    // }
+    if(usuario.situacao !== UsuarioService.SITUACAO_ATIVA) {
+      throw new UnauthorizedException('Usuário não se encontra ativo');
+    }
 
     return usuario;
   }

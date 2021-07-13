@@ -1,6 +1,6 @@
 import { FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { DialogService } from '../../../services/shared/dialog.service';
 import { MensagemService } from '../../../services/shared/mensagem.service';
 import { UtilService } from '../../../services/util.service';
@@ -21,8 +21,9 @@ export class AgrupadorPesquisarComponent extends CrudListComponent<Agrupador> im
     public mensagem: MensagemService,
     public util: UtilService,
     public dialogService: DialogService,
+    public route: ActivatedRoute,
     protected readonly service: RemoteService) {
-      super(service, dialogService, mensagem, router, util);
+      super(service, dialogService, mensagem, router, route, util);
       this.resource = "agrupador";
   }
 
@@ -31,5 +32,9 @@ export class AgrupadorPesquisarComponent extends CrudListComponent<Agrupador> im
       descricao: [''],
       ativo: ['']
     });
+  }
+
+  posIniciarPagina() {
+    this.pesquisar();
   }
 }
