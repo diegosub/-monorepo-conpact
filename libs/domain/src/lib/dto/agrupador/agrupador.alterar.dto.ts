@@ -8,9 +8,4 @@ export class AgrupadorAlterarDto {
   @IsNotEmpty({ message: 'Descrição obrigatória.' })
   descricao: string;
 
-  // Preenchidos pelo sistema
-
-  @Exclude()
-  dataAlteracao: Date;
-
 }

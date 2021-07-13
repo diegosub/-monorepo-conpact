@@ -1,9 +1,9 @@
-import { SecurityService } from '../security/security.service';
-import { UsuarioService } from '../usuario/usuario.service';
+import { Usuario } from '@admin/domain';
 import { BadRequestException, Injectable, UnauthorizedException } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
 import { JwtService } from '@nestjs/jwt';
-import { Usuario } from '@admin/domain';
+import { SecurityService } from '../security/security.service';
+import { UsuarioService } from '../usuario/usuario.service';
 
 
 @Injectable()
@@ -16,13 +16,30 @@ export class AuthService {
     private readonly securityService: SecurityService,
   ) { }
 
-  // async validateUser(username: string, pass: string): Promise<Usuario> {
-  //   return await this.authUser(username, pass);
-  // }
+  async validateUser(username: string) {
+    let usuario = new Usuario();
+    usuario.login = username;
+    usuario.situacao = UsuarioService.SITUACAO_ATIVA;
+
+    const retorno = await this.usuarioService.get(usuario);
+
+    if(retorno) {
+      return {
+        codigo: retorno.codigo,
+        login: retorno.login,
+        nome: retorno.nome,
+        codigoCadastroUnico: retorno.codigoCadastroUnico
+      }
+    } else {
+      throw new UnauthorizedException('Este token não está válido');
+    }
+  }
 
   async login(user: Usuario): Promise<any> {
-    const payload = { email: user.login, sub: user };
+    const payload = { login: user.login, sub: user };
     return {
+      codigo: user.codigo,
+      codigoCadastroUnico: user.codigoCadastroUnico,
       nome: user.nome,
       token: this.jwtService.sign(payload),
     };
@@ -35,24 +52,28 @@ export class AuthService {
   //   }, this.configService.get('JWT_SECRET'), { expiresIn: '40min' })
   // }
 
-  async authUser(email: string, senha: string): Promise<Usuario> {
-     if (!email || email.trim() === '') {
+  async authUser(login: string, senha: string): Promise<Usuario> {
+     if (!login || login.trim() === '') {
       throw new BadRequestException('Email é obrigatório');
     }
     if (!senha || senha.trim() === '') {
       throw new BadRequestException('Senha é obrigatório');
     }
 
-    const usuario = await this.usuarioService.getByEmail(email);
-    // if (!usuario) {
-    //   throw new UnauthorizedException('Usuário ou senha inválidos');
+    const usuario: Usuario = await this.usuarioService.getByLogin(login);
+
+    if (!usuario) {
+      throw new UnauthorizedException('Usuário ou senha inválidos');
+    }
+
+    if (!this.securityService.validarSenha(senha, usuario.senha)) {
+      throw new UnauthorizedException('Usuário ou senha inválidos');
+    }
+
+    // if(usuario.situacao !== ) {
+    //   throw new UnauthorizedException('Usuário não se encontra ativo');
     // }
-    // if (usuario.situacao !== SituacaoUsuario.ATIVO) {
-    //   throw new UnauthorizedException('Usuário não está ativo');
-    // }
-    // if (!this.securityService.validarSenha(senha, usuario.senha)) {
-    //   throw new UnauthorizedException('Usuaário ou senha inválidos');
-    // }
+
     return usuario;
   }
 

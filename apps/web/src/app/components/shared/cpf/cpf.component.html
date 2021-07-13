@@ -1,0 +1,14 @@
+<!-- CPF ATIVO -->
+<input *ngIf="!isReadOnly" 
+       type="text" (blur)="validarCpf();"
+       autocomplete="offCpf"
+       [(ngModel)]="cpfValor" 
+       mask='000.000.000-00' name="cpf" class="form-control"> 
+
+<!-- CPF READONLY-->
+<input *ngIf="isReadOnly" 
+       type="text" 
+       [(ngModel)]="cpfValor" 
+       mask='000.000.000-00'
+       name="cpf" class="form-control" 
+       readonly="true">

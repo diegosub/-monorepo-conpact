@@ -12,12 +12,4 @@ export class AgrupadorInserirDto {
   @IsNotEmpty({ message: 'Cadastro Único obrigatório.' })
   codigoCadastroUnico: number;
 
-  // Preenchidos pelo sistema
-
-  @Exclude()
-  ativo: boolean;
-
-  @Exclude()
-  dataInclusao: Date;
-
 }

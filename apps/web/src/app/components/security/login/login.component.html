@@ -1,0 +1,45 @@
+
+    <div id="container" class="cls-container">
+
+		<div id="bg-overlay"></div>
+
+		<div class="cls-content">
+		    <div class="cls-content-sm panel">
+		        <div class="panel-body">
+		            <div class="mar-ver pad-btm">
+		                <h1 class="h3">Autenticação</h1>
+		                <p>Faça login em sua conta</p>
+		            </div>
+		            <form (ngSubmit)="onSubmit()" [formGroup]="formulario">
+		                <div class="form-group" [ngClass]="aplicaCssErro('username')">
+		                    <input type="text" formControlName="username" id="username" class="form-control" placeholder="Login"/>
+							          <app-msg-error [control]="formulario.get('username')"></app-msg-error>
+						        </div>
+
+                    <div class="form-group" [ngClass]="aplicaCssErro('password')">
+                      <input type="password" formControlName="password" id="password" class="form-control" placeholder="Senha"/>
+                      <app-msg-error [control]="formulario.get('password')"></app-msg-error>
+                    </div>
+
+                    <button type="submit" [disabled]="!formulario.valid" class="btn btn-primary btn-lg btn-block">Entrar</button>
+
+                    <button type="button" class="btn btn-default btn-lg btn-block btn-labeled">
+                      <img class="google-icon text-center" style="padding-left: 3%;" src="./../../../../assets/img/google.svg"/>
+                      <span style="padding-left: 15%;"><b>Entrar com Google</b></span>
+                    </button>
+
+
+		            </form>
+		        </div>
+
+		        <div class="pad-all" >
+		            <a routerLink="/recuperar-senha" class="btn-link mar-rgt">Esqueceu sua senha ?</a>
+                <a routerLink="/registrar" class="btn-link mar-lft">Criar uma nova conta</a>
+
+                <div class="media pad-top bord-top">
+
+		            </div>
+		        </div>
+		    </div>
+		</div>
+    </div>

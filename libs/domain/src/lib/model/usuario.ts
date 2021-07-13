@@ -1,5 +1,5 @@
 import { Base } from './base';
-import { Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity({name: "tbl_usr", schema: "sc_sgr"})
 export class Usuario extends Base {
@@ -19,8 +19,8 @@ export class Usuario extends Base {
   @Column({name: "cd_cun"})
   codigoCadastroUnico: number;
 
-  @Column({name: "st_usr"})
-  situacao: number;
+  @Column({name: "st_usr",  type: "numeric"})
+  situacao: Number;
 
   @Column({name: "fg_adm_usr", type: "boolean"})
   flagAdministrador: boolean;

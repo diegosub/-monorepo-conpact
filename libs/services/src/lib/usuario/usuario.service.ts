@@ -1,11 +1,14 @@
 
-import { Usuario } from '@admin/domain';
+import { QueryHelper, Usuario } from '@admin/domain';
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Connection, Repository } from 'typeorm';
 
 @Injectable()
 export class UsuarioService {
+
+  public static SITUACAO_ATIVA: number = 1;
+
   constructor(
     @InjectRepository(Usuario)
     private readonly repository: Repository<Usuario>,
@@ -16,8 +19,21 @@ export class UsuarioService {
     return await this.repository.findOne(codigo);
   }
 
-  async getByEmail(email: string): Promise<Usuario> {
-    return await this.repository.findOne(email);
+  async get(filtros: Usuario): Promise<Usuario> {
+
+    const queryHelper = new QueryHelper();
+
+    queryHelper.numberEqual("codigo", filtros.codigo);
+    queryHelper.textLike("nome", filtros.nome);
+    queryHelper.textLike("login", filtros.login);
+    queryHelper.rawEqual("situacao", filtros.situacao);
+
+    return await this.repository.findOne(queryHelper.filters);
+
+  }
+
+  async getByLogin(login: string): Promise<Usuario> {
+    return await this.repository.findOne({login: login});
   }
 
   // async pesquisar(filtros: Usuario): Promise<Usuario[]> {

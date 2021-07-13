@@ -1,0 +1,41 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+@import '~ngx-toastr/toastr.css';
+
+.mat-dialog-container {
+    padding: 1px !important;
+}
+
+.cdk-overlay-container {
+    z-index: 10000;
+}
+
+.mat-calendar-body-selected {
+    background-color: #0b448a;
+    color: #fff;
+}
+
+.mat-tooltip {
+    font-size: 12px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+}
+
+.panel-footer .btn+.btn {
+    margin-bottom: 0;
+    margin-left: 5px;
+}
+
+.panel-footer-search .btn+.btn {
+    margin-bottom: 0;
+    margin-left: 5px;
+}
+
+.p-static {
+    font-size: 16px;
+    font-weight: bold;
+    padding-top: 5px;
+    padding-bottom: 3px;
+}

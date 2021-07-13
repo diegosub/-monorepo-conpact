@@ -1,0 +1,13 @@
+<!-- EMAIL ATIVO -->
+<input *ngIf="!isReadOnly" 
+       type="text" (blur)="validarEmail()"
+       autocomplete="offMail"
+       [(ngModel)]="emailValor" maxlength="255"
+       name="email" class="form-control">
+
+<!-- EMAIL READONLY-->
+<input *ngIf="isReadOnly" 
+       type="text" 
+       [(ngModel)]="emailValor" 
+       name="email" class="form-control" 
+       readonly="true">

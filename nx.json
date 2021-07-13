@@ -22,20 +22,27 @@
     }
   },
   "projects": {
-    "domain": {
-      "tags": []
-    },
-    "data-access": {
-      "tags": []
-    },
-    "services": {
-      "tags": []
-    },
     "api": {
       "tags": []
     },
     "core": {
       "tags": []
+    },
+    "data-access": {
+      "tags": []
+    },
+    "domain": {
+      "tags": []
+    },
+    "services": {
+      "tags": []
+    },
+    "web": {
+      "tags": []
+    },
+    "web-e2e": {
+      "tags": [],
+      "implicitDependencies": ["web"]
     }
   }
 }

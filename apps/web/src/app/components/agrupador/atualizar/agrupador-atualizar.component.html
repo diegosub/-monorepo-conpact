@@ -1,0 +1,65 @@
+<div id="page-head">
+	<div id="page-title">
+		<h1 class="page-header text-overflow">
+			<span *ngIf="!codigo">Cadastro de Agrupador de Despesa</span>
+			<span *ngIf="codigo">Alteração de Agrupador de Despesa</span>
+		</h1>
+	</div>
+
+	<ol class="breadcrumb">
+	  <li><i class="fa fa-th"></i></li>
+	  <li>Agrupador</li>
+	  <li *ngIf="!codigo" class="active">Cadastrar</li>
+	  <li *ngIf="codigo" class="active">Alterar</li>
+	</ol>
+</div>
+
+<div id="page-content">
+	<div class="row">
+		<div class="col-sm-12">
+			<div class="panel">
+
+				<!--Block Styled Form -->
+				<!--===================================================-->
+				<form [formGroup]="formulario" accept-charset="utf-8">
+					<div class="panel-body">
+
+						<p class="bord-btm pad-ver text-main text-bold">Dados Gerais</p>
+
+						<div class="row">
+							<div class="col-sm-9">
+								<div class="form-group" [ngClass]="aplicaCssErro('descricao')">
+									<label class="control-label">Descricao *</label>
+									<input type="text" formControlName="descricao" name="descricao" class="form-control"/>
+									<app-msg-error [control]="formulario.get('descricao')"></app-msg-error>
+								</div>
+							</div>
+						</div>
+
+						<div class="row" style="padding-top: 5px;">
+							<div class="col-sm-8">
+								<i class="fa fa-info-circle"></i> Todos os campos com * devem ser preenchidos.
+							</div>
+						</div>
+					</div>
+					<div class="panel-footer text-right">
+						<div class="box-inline">
+
+							<button class="btn btn-primary btn-labeled" type="button" (click)="onSubmit()" [disabled]="!formulario.valid" [loading]="carregando">
+								<i class="btn-label fa fa-save"></i>
+								<span *ngIf="!codigo">Cadastrar</span>
+								<span *ngIf="codigo">Alterar</span>
+							</button>
+
+							<a routerLink="/agrupador" class="btn btn-default" >Voltar</a>
+
+						</div>
+					</div>
+				</form>
+
+			</div>
+		</div>
+	</div>
+
+</div>
+

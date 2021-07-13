@@ -7,42 +7,42 @@ export class QueryHelper {
   sort = {}
 
   numberEqual(field: string, id: number): QueryHelper {
-    if(id != null && id != undefined) {
+    if(id) {
       this.filters[field] = Equal(id);
     }
     return this;
   }
 
   textLike(field: string, value: string): QueryHelper {
-    if(value != null && value != undefined) {
+    if(value) {
       this.filters[field] = ILike("%" + value + "%");
     }
     return this;
   }
 
   textEqual(field: string, value: string): QueryHelper {
-    if(value != null && value != undefined) {
+    if(value) {
       this.filters[field] = Equal(new RegExp(`^${value.replace(/\./g, '\\.').trim()}$`, 'i'));
     }
     return this;
   }
 
   rawEqual(field: string, value: any): QueryHelper {
-    if(value != null && value != undefined) {
+    if(value) {
       this.filters[field] = Raw(value);
     }
     return this;
   }
 
   notEqual(field: string, value: any): QueryHelper {
-    if(value != null && value != undefined) {
+    if(value) {
       this.filters[field] = Not(value);
     }
     return this;
   }
 
   in(field: string, value: any[]): QueryHelper {
-    if(value != null && value != undefined) {
+    if(value) {
       this.filters[field] = In(value);
     }
     return this;
@@ -106,18 +106,18 @@ export class QueryHelper {
   //   return this;
   // }
 
-  // setOrder(field: string, order: string): QueryHelper {
-  //   if(order != null && order != undefined) {
-  //     this.sort[field] = this.getSortType(order);
-  //   }
-  //   return this;
-  // }
+  setOrder(field: string, order: string): QueryHelper {
+    if(field) {
+      this.sort[field] = this.getSortType(order);
+    }
+    return this;
+  }
 
-  // getSortType(order: string): number {
-  //   switch (order.toLowerCase()) {
-  //     case 'asc': return 1
-  //     case 'desc': return -1
-  //     default: return 1
-  //   }
-  // }
+  getSortType(order: string): number {
+    switch (order.toLowerCase()) {
+      case 'asc': return 1
+      case 'desc': return -1
+      default: return 1
+    }
+  }
 }

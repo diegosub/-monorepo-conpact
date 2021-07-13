@@ -1,0 +1,72 @@
+
+<nav id="mainnav-container">
+    <div id="mainnav">
+
+        <div id="mainnav-menu-wrap">
+            <div class="nano">
+                <div class="nano-content">
+
+                    <div id="mainnav-profile" class="mainnav-profile">
+                        <div class="profile-wrap text-center">
+                            <div class="pad-btm">
+                                Bem vindo,
+                            </div>
+                            <a href="#profile-nav" class="box-block" data-toggle="collapse" aria-expanded="false">
+                                <p class="mnp-name">{{nomeFormatado}}</p>
+                            </a>
+                        </div>
+                    </div>
+
+                    <ul id="mainnav-menu" class="list-group">
+
+                        
+
+                        <li class="list-header">Principal</li>
+
+                        <li>
+                            <a [routerLink]="['/']">
+                                <i class="pli-home"></i>
+                                <span class="menu-title">Dashboard</span>
+                            </a>
+                        </li>
+
+                        <li routerLinkActive="active-sub active">
+                            <a [routerLink]="['/despesa/pendente']">
+                                <i class="fa fa-hourglass-3"></i>
+                                <span class="menu-title">Despesa</span>                            
+                            </a>
+                        </li>
+
+                        <li class="list-header">Configurações</li>
+                        
+                        <li routerLinkActive="active-sub active">
+                            <a [routerLink]="['/mes']">
+                                <i class="fa fa-calendar-o"></i>
+                                <span class="menu-title">Meses</span>                            
+                            </a>
+                        </li>
+
+                        <li routerLinkActive="active-sub active">
+                            <a [routerLink]="['/agrupador']">
+                                <i class="fa fa-th"></i>
+                                <span class="menu-title">Agrupador</span>                            
+                            </a>
+                        </li>
+
+                        <li routerLinkActive="active-sub active">
+                            <a [routerLink]="['/categoria']">
+                                <i class="fa fa-align-justify"></i>
+                                <span class="menu-title">Categoria</span>                            
+                            </a>
+                        </li>
+                        
+                    </ul>
+                </div>
+            </div>
+                    <!--================================-->
+                    <!--End widget-->
+
+        </div>
+    </div>
+</nav>
+

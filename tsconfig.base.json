@@ -16,9 +16,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@admin/domain": ["libs/domain/src/index.ts"],
-      "@admin/data-access": ["libs/data-access/src/index.ts"],
       "@admin/core": ["libs/core/src/index.ts"],
+      "@admin/data-access": ["libs/data-access/src/index.ts"],
+      "@admin/domain": ["libs/domain/src/index.ts"],
       "@admin/services": ["libs/services/src/index.ts"]
     }
   },

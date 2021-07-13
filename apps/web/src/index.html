@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Conpact - Backoffice</title>
+  <base href="/">
+
+
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+
+  <link href="assets/css/fonts.css" rel="stylesheet">
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet">
+  <link href="assets/css/nifty.min.css" rel="stylesheet">
+  <link href="assets/css/demo/nifty-demo-icons.min.css" rel="stylesheet">
+  <link href="assets/premium/icon-sets/icons/line-icons/premium-line-icons.min.css" rel="stylesheet">
+  <link href="assets/plugins/pace/pace.min.css" rel="stylesheet">
+  <link href="assets/css/demo/nifty-demo.min.css" rel="stylesheet">
+  <link href="assets/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+  <link href="assets/plugins/ionicons/css/ionicons.min.css" rel="stylesheet">
+  <link href="assets/plugins/fooTable/css/footable.core.css" rel="stylesheet">
+  <link href="assets/plugins/themify-icons/themify-icons.min.css" rel="stylesheet">
+  <link href="assets/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.css" rel="stylesheet">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Open+Sans" />
+
+
+  <style type="text/css">
+      .pace .pace-activity {
+        top: 19px;
+        right: 19px;
+        display: block;
+      }
+      .page-loading {
+        position: fixed;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        overflow: hidden;
+        background: #294f75;
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+        z-index: -1;
+      }
+      .loading-icon {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 38px;
+        height: 38px;
+        margin-left: -19px;
+        margin-top: -19px;
+      }
+      app-root:empty ~ .page-loading {
+        opacity: 1;
+        z-index: 1;
+      }
+
+      .mydrp, .mydrp .headerclearbtn, .mydrp .headerokbtn {
+          border: 1px solid rgba(0,0,0,0.07) !important
+      }
+    </style>
+
+</head>
+<body>
+
+  <app-root></app-root>
+  <div class="page-loading">
+    <img src="assets/img/oval.svg" class="loading-icon" />
+  </div>
+
+
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/bootstrap.min.js"></script>
+  <script src="assets/js/nifty.min.js"></script>
+  <script src="assets/js/demo/ui-modals.js"></script>
+  <script src="assets/js/geral.js"></script>
+  <script src="assets/plugins/bootbox/bootbox.min.js"></script>
+  <script src="assets/js/demo/nifty-demo.min.js"></script>
+  <script src="assets/plugins/fooTable/dist/footable.all.min.js"></script>
+
+
+    <!--Full Calendar [ OPTIONAL ]-->
+  <script src="assets/plugins/fullcalendar/lib/moment.min.js"></script>
+	<script src="assets/plugins/fullcalendar/lib/jquery-ui.custom.min.js"></script>
+	<script src="assets/plugins/fullcalendar/fullcalendar.min.js"></script>
+
+  <script src="assets/js/demo/misc-fullcalendar.js"></script>
+
+</body>
+</html>

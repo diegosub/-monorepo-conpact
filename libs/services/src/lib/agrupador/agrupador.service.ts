@@ -22,7 +22,12 @@ export class AgrupadorService extends GenericService<Agrupador> {
     queryHelper.textLike("descricao", filtros.descricao);
     queryHelper.rawEqual("ativo", filtros.ativo);
 
-    return await this.repository.find(queryHelper.filters);
+    const order = queryHelper.setOrder("descricao", "asc");
+
+    return await this.repository.find({
+        where: queryHelper.filters,
+        order: queryHelper.sort
+    });
   }
 
   async validarInserir(queryRunner: QueryRunner, agrupador: Agrupador) {

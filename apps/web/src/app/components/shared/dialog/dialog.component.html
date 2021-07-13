@@ -1,0 +1,14 @@
+<div class="modal-body">
+    <b>{{ data.message }}</b>
+</div>
+
+<div class="panel-footer text-center">
+    <div class="card-actionbar-row" *ngIf="data.fgConfirm">
+      <button id="yes-button" class="btn ink-reaction btn-raised btn-info" [mat-dialog-close]="true">SIM</button>
+      <button  id="no-button" class="btn ink-reaction btn-raised btn-default" [mat-dialog-close]="false">NÃO</button>
+    </div>
+
+    <div class="card-actionbar-row" *ngIf="data.fgAlert" style="text-align: center">
+        <button id="ok-button" class="btn ink-reaction btn-raised btn-info" [mat-dialog-close]="true">OK</button>
+    </div>
+</div>
